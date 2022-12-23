@@ -13,9 +13,10 @@ export class OpenRpcModule{
         public static createDocument(
                 app:INestApplicationContext,
                 // config:Omit<OpenrpcDocument, 'methods'>,
+                options:Object  = {},
                 ) {
                         const openRpcScanner = new OpenRpcScanner();
-                        const document = openRpcScanner.scanApplication(app);
+                        const document = openRpcScanner.scanApplication(app, options);
 
                         console.log(document)
                 

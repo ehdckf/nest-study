@@ -1,15 +1,16 @@
 import { Module } from '@nestjs/common';
 // import { AppController } from './app.controller';
 // import { AppService } from './app.service';
-import { PetHandler } from './pet/pet.handler';
-import { JsonRpcModule } from './jsonrpc/index';
+import { CatHandler } from './cat/cat.handler';
+// import { JsonRpcModule } from './jsonrpc/index';
+
 @Module({
   imports: [
-    JsonRpcModule.forRoot({
-      path: '/rpc',
-    }),
+    // JsonRpcModule.forRoot({
+    //   path: '/rpc',
+    // }),
   ],
   controllers: [],
-  providers: [PetHandler],
+  providers: [CatHandler],
 })
 export class AppModule {}
