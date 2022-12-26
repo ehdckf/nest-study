@@ -7,37 +7,53 @@
 //   RpcHandler,
 // } from '../jsonrpc/context/decorators';
 
-import { CatId, Cat } from './cat.dto';
+import {DogId,Dog } from './dog.dto';
 import { OpenRpcHandler } from 'src/openrpc/decorators';
 import { OpenRpcMethod } from 'src/openrpc/decorators';
+import { getDogNameExample } from './dog.example';
 
 // import { RpcHandler } from '../../docs/decorators/rpc-handler.decorator';
 
 @OpenRpcHandler({
-  handler: 'cat',
+  handler: 'dog',
 })
 
-export class CatHandler {
+export class DogHandler {
 
-  @OpenRpcMethod({name:'get'})
+  @OpenRpcMethod({
+    name:'get',
+    description:"get Dog name",
+    params: DogId,
+    result: Dog,
+    examples:[getDogNameExample]
+  })
   public get(
-  ): Cat {
-    const pet: Cat = {
-      id: 1,
-      name: 'kitty',
+  ): Dog {
+    const pet: Dog = {
+      id: {id:1},
+      name: 'Marley',
     };
     return pet;
   }
 
   @OpenRpcMethod({name:'kill'})
-  public kill(
-  ): string {
-    const pet: Cat = {
-      id: 1,
-      name: 'kitty',
-    };
-    return 'Meow';
+  public kill(): string {
+    
+    return 'Woof';
   }
+
+
+  @OpenRpcMethod({
+    name:'get_list',
+    description:"get Dog name",
+    
+    result: Dog,
+    examples:[getDogNameExample]
+  })
+  public getList(){
+  
+  }
+
 
   //   @RpcMethodHandler('delete')
   //   public async delete(
