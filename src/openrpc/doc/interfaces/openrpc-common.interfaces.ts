@@ -175,7 +175,6 @@ export interface JSONSchemaObject {
   description?: Description;
   default?: AlwaysTrue;
   readOnly?: ReadOnly;
-  example?: AlwaysTrue;
   examples?: Examples;
   multipleOf?: MultipleOf;
   maximum?: Maximum;

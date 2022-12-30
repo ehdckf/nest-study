@@ -4,7 +4,7 @@ import { InstanceWrapper } from '@nestjs/core/injector/instance-wrapper';
 import { SchemaObject } from '@nestjs/swagger/dist/interfaces/open-api-spec.interface';
 import { flatten } from 'lodash';
 import { DenormalizedDoc, DenormalizedDocResolvers } from './interfaces';
-import { DECORATORS } from './constants';
+import { DECORATORS } from '../constants';
 import {
         exploreOpenRpcHandlerMatadata,
         exploreOpenRpcMethodMetadata
@@ -49,7 +49,6 @@ export class OpenRpcExplorer {
         }
 
         public getSchemas(): Record<string, SchemaObject> {
-                console.log(this.schemas)
                 const ret = {...this.schemas} as unknown as Record<string, SchemaObject>;
                 return ret;
         }

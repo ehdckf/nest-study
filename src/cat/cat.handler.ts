@@ -38,14 +38,4 @@ export class CatHandler {
     };
     return 'Meow';
   }
-
-  //   @RpcMethodHandler('delete')
-  //   public async delete(
-  //     @RpcPayload() payload: Payload,
-  //     @RpcVersion() version: string,
-  //     @RpcId() id: number | string,
-  //     @RpcMethod() method: string,
-  //   ) {
-  //     return payload;
-  //   }
 }

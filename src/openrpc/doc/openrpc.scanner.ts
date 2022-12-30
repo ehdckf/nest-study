@@ -14,6 +14,9 @@ import { OpenRpcExplorer } from './openrpc.explorer';
 import { OpenrpcDocument } from './interfaces/openrpc-common.interfaces';
 import { OpenRpcTransformer } from './openrpc.transformer';
 import { DenormalizedDoc } from './interfaces/denormalized-doc.interface';
+import { SwaggerDocumentOptions } from '@nestjs/swagger';
+
+export interface OpenrpcDocumentOptions extends SwaggerDocumentOptions {}
 
 export class OpenRpcScanner {
         private readonly transformer = new OpenRpcExplorer();
@@ -26,8 +29,16 @@ export class OpenRpcScanner {
         )
 
         public scanApplication(
-                app: INestApplicationContext
-        ) {
+                app: INestApplicationContext,
+                options: OpenrpcDocumentOptions,
+        ): Omit<OpenrpcDocument, "openrpc"| "info"> {
+                const {
+                        deepScanRoutes,
+                        include:includedModules = [],
+                        extraModels = [],
+                        ignoreGlobalPrefix = false,
+                } = options
+
                 const container: NestContainer = (app as any).container;
                 const modules: Module[] = [...container.getModules().values()];
 
@@ -55,10 +66,11 @@ export class OpenRpcScanner {
                 );
 
                 const schemas = this.explorer.getSchemas();
-                // this.addExtraModles(schemas, []);
-                return denormalizedHandlers;
-                // const schemas = this.explorer.getSchemas();
-
+                this.addExtraModels(schemas, extraModels);
+                return {
+                        methods:[...denormalizedHandlers],
+                        components: {schemas}
+                }
         }
 
         private getGlobalPrefix(app: INestApplicationContext): string {
@@ -84,5 +96,14 @@ export class OpenRpcScanner {
 
                 return denormalizedArray
 
+        }
+
+        private addExtraModels(
+                schemas: Record<string, SchemaObject>,
+                extraModels: Function[],
+        ) {
+                extraModels.forEach((item) => {
+                        this.schemaObjectFactory.exploreModelSchema(item, schemas);
+                });
         }
 }

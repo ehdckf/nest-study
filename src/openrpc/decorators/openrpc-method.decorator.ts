@@ -2,7 +2,7 @@ import {Type} from '@nestjs/common';
 import { SchemaObject } from '@nestjs/swagger/dist/interfaces/open-api-spec.interface';
 import {createMixedDecorator} from '@nestjs/swagger/dist/decorators/helpers';
 import { DECORATORS } from '../constants';
-import { MethodObject } from '../interfaces';
+import { MethodObject } from '../doc/interfaces';
 
 export interface OpenRpcMethodOptions{
         name: string;

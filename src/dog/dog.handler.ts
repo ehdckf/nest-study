@@ -7,7 +7,7 @@
 //   RpcHandler,
 // } from '../jsonrpc/context/decorators';
 
-import {DogId,Dog } from './dog.dto';
+import {DogId,Dog, Dogs } from './dog.dto';
 import { OpenRpcHandler } from 'src/openrpc/decorators';
 import { OpenRpcMethod } from 'src/openrpc/decorators';
 import { getDogNameExample } from './dog.example';
@@ -46,8 +46,7 @@ export class DogHandler {
   @OpenRpcMethod({
     name:'get_list',
     description:"get Dog name",
-    
-    result: Dog,
+    result: Dogs,
     examples:[getDogNameExample]
   })
   public getList(){

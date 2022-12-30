@@ -1,6 +1,6 @@
 import {Type} from '@nestjs/common';
 import { SchemaObject } from '@nestjs/swagger/dist/interfaces/open-api-spec.interface';
-import { DECORATORS } from '../constants';
+import { DECORATORS } from '../../constants';
 import { MethodObjectFactory } from '../services/method-object.factory';
 
 const methodObjectFactory = new MethodObjectFactory();
