@@ -28,6 +28,7 @@
     "js-yaml": "^4.1.0",
     "jsdom": "^20.0.3",
     "lodash": "^4.17.21",
+    "monaco-editor": "^0.34.1",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.8.0"

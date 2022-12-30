@@ -6,7 +6,7 @@ import {
 import { SwaggerDocumentOptions } from '@nestjs/swagger';
 import { validatePath } from '@nestjs/swagger/dist/utils/validate-path.util';
 import * as jsyaml from 'js-yaml';
-import { oprnRpcHtml } from './builder';
+import { openRpcJavascript, oprnRpcHtml } from './builder';
 import { OpenrpcDocument } from './interfaces/openrpc-common.interfaces';
 import { OpenRpcScanner } from './openrpc.scanner';
 
@@ -46,13 +46,18 @@ export class OpenRpcModule {
                 const finalPath = validatePath(path);
                 const yamlDocument = jsyaml.dump(document);
                 const jsonDocument = JSON.stringify(document);
-
                 const html = oprnRpcHtml();
-
+                const js = openRpcJavascript();
                 httpAdapter.get(finalPath, (req, res) => {
                         console.log(html)
                         res.type('text/html');
                         res.send(html);
+                });
+
+                httpAdapter.get(finalPath+'/main.js', (req, res) => {
+                        console.log(html)
+                        res.type('text/javascript');
+                        res.send(js);
                 });
 
                 httpAdapter.get(finalPath + '-json', (req, res) => {
